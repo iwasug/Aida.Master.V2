@@ -1,6 +1,7 @@
 ﻿jQuery(document).ready(function () {
     $('.date-picker').datepicker({
-        autoclose: true
+        autoclose: true,
+        todayBtn: true
     }).on('changeDate', function (e) {
     });
 

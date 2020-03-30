@@ -67,8 +67,6 @@ namespace AIDA.Master.Service.Businesses
             else
                 repo.Condition = repo.Condition.And(x => x.RayonCode.Equals(model.RayonCode));
 
-
-
             SetDatatableRepository(model, arrOrderColumn, ref repo, ref result);
 
             if (model.Length > -1 && result.TotalRecords == 0)
