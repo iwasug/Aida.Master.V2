@@ -1,0 +1,27 @@
+﻿@using Radyalabs.Core.Helper
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.ActiveMenu = "dashboard";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    Dashboard
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="@SiteHelper.GetBaseUrl()">Dashboard</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+@Html.Partial("_FlashMessage")
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+    </div>
+</div>
+<!-- END PAGE CONTENT-->

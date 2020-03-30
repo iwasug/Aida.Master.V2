@@ -1,0 +1,16 @@
+﻿@using Radyalabs.Core.Helper
+@using AIDA.Master.Service.Models
+@{
+    AlertMessage alert = TempData["AlertMessage"] as AlertMessage;
+}
+
+<div class="alert-wrapper">
+    @if (alert != null && ! string.IsNullOrEmpty(alert.Text))
+    {
+        <div class="alert @(alert.Status == 0 ? "alert-danger" : "alert-success")">
+            <button class="close" data-close="alert"></button>
+            @(Html.Raw(string.IsNullOrEmpty(alert.Text) ? "" : TextHelper.ConvertToHtmlNewLine(alert.Text)))
+        </div>
+    }
+</div>
+

@@ -1,0 +1,75 @@
+﻿@using Radyalabs.Core.Helper
+@{
+    ViewBag.Title = "Salesman";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.ActiveMenu = "salesman";
+}
+
+@section PageStyle{
+    <link rel="stylesheet" type="text/css" href="@SiteHelper.GetBaseUrl()Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="@SiteHelper.GetBaseUrl()Assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />
+}
+
+@section PageScript{
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+}
+
+@section CustomScript{
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/custom/js/_salesman-index.js"></script>
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    Daftar Salesman
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@SiteHelper.GetBaseUrl()"><i class="fa fa-home"></i></a>
+            <a href="@Url.Action("Index", "Salesman")">Salesman</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        @if (ViewBag.IsEditable)
+        {
+            <a href="@Url.Action("Add", "Salesman")" class="btn btn-fit-height btn-sm blue-stripe" data-container="body" data-placement="left" data-original-title="" title="">
+                <i class="fa fa-plus" aria-hidden="true"></i> Tambah
+            </a>
+        }
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+@Html.Partial("_FlashMessage")
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    @*<form id="main-form" action="@Url.Action("Index", "Salesman")">
+        <input type="hidden" name="p" value="@ViewBag.FormattedMonthYear"/>
+    </form>
+    <div id="datatable-filter-date" style="display: none">
+        <div class="input-group input-small" style="margin:0 auto">
+            <input class="form-control datepicker input-small text-center" type="text" name="p" value="@ViewBag.FormattedMonthYear" readonly>
+            <span class="input-group-btn">
+                <button id="btn-date" class="btn blue" type="submit"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>*@
+    <div class="col-md-12">
+        <table class="datatable table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th style="text-align: right">#</th>
+                    <th style="text-align: left">Action</th>
+                    <th style="text-align: center">NIK</th>
+                    <th>Nama</th>
+                    <th style="text-align: center">Salesman</th>
+                    <th style="text-align: center">Valid From</th>
+                    <th style="text-align: center">Valid To</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<!-- END PAGE CONTENT-->

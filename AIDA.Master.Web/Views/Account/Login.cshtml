@@ -1,0 +1,274 @@
+﻿@using Radyalabs.Core.Helper
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>AIDA Master | Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="@SiteHelper.GetBaseUrl()Assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="@SiteHelper.GetBaseUrl()Assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="@SiteHelper.GetBaseUrl()Assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="@SiteHelper.GetBaseUrl()Assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="@SiteHelper.GetBaseUrl()Assets/global/plugins/select2/select2.css" rel="stylesheet" type="text/css" />
+    <link href="@SiteHelper.GetBaseUrl()Assets/admin/pages/css/login-soft.css" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME STYLES -->
+    <link href="@SiteHelper.GetBaseUrl()Assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="@SiteHelper.GetBaseUrl()Assets/global/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="@SiteHelper.GetBaseUrl()Assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css" />
+    <link id="style_color" href="@SiteHelper.GetBaseUrl()Assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css" />
+    <link href="@SiteHelper.GetBaseUrl()Assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="login">
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        <h1>
+            <a class="font-blue bold" href="@SiteHelper.GetBaseUrl()">AIDA Master Data & Report</a>
+        </h1>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+    <div class="menu-toggler sidebar-toggler">
+    </div>
+    <!-- END SIDEBAR TOGGLER BUTTON -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        <!-- BEGIN LOGIN FORM -->
+        <form class="login-form" action="@Url.Action("Login", "Account")" method="post">
+            @Html.AntiForgeryToken()
+            <h3 class="form-title">Login to your account</h3>
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span>
+                    Enter any username and password.
+                </span>
+            </div>
+            @Html.Partial("_FlashMessage")
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">Username</label>
+                <div class="input-icon">
+                    <i class="fa fa-user"></i>
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Username" name="Username" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">Password</label>
+                <div class="input-icon">
+                    <i class="fa fa-lock"></i>
+                    <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="Password" />
+                </div>
+            </div>
+            <div class="form-actions">
+                @*<label class="checkbox">
+                    <input type="checkbox" name="toc" value="1" /> <a id="btn-toc" class="font-blue-ebonyclay" href="javascript:;">Syarat dan Ketentuan</a>
+                </label>*@
+                <button type="submit" class="btn blue pull-right">
+                    Login <i class="m-icon-swapright m-icon-white"></i>
+                </button>
+            </div>
+            <div class="forget-password">
+            </div>
+        </form>
+        <!-- END LOGIN FORM -->
+    </div>
+    <!-- END LOGIN -->
+    <!-- BEGIN COPYRIGHT -->
+    <div class="copyright">
+        2019 &copy; APL
+    </div>
+    @*<div id="modal-toc" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Syarat dan Ketentuan</h4>
+                </div>
+                <div class="modal-body" style="max-height: 550px; overflow-y: auto">
+                    <h4>SANGGAHAN HUKUM</h4>
+                    <h5><u>PERSYARATAN PENGGUNAAN</u></h5>
+                    <ol>
+                        <li><u class="bold">Penerimaan Persyaratan.</u>  Laman ini dimiliki dan dioperasikan oleh Zuellig Pharma. Pengaksesan pada dan penggunaan laman ini disediakan  oleh Zuellig Pharma untuk Anda dengan tunduk pada Persyaratan Penggunaan di bawah ini ("TOU"). Dengan mengakses dan menggunakan laman ini, Anda setuju terikat dengan persyaratan TOU ini. Jika Anda tidak menyetujui setiap persyaratan TOU ini, silakan segera berhenti menggunakan akses Anda. Anda mengakui dan menyetujui bahwa Zuellig Pharma dapat mengenakan syarat dan ketentuan lebih lanjut dan membuat perubahan pada TOU ini sebagaimana dapat dianggap layak oleh Zuellig Pharma dari waktu ke waktu, atas kebijakannya. Oleh karenanya, kami meminta Anda untuk menandai dan secara berkala menelaah halaman ini untuk memastikan pemahaman yang berkelanjutan dengan versi terkini dari TOU kami. Atas setiap perubahan persyaratan TOU ini, Zuellig Pharma akan memberitahukan Anda dengan menampilkan perubahan tersebut secara daring di laman ini. Anda menyetujui bahwa setiap pemberitahuan perubahan pada TOU ini sebagaimana disebut diatas merupakan pemberitahuan yang cukup untuk kepentingan klausul ini. Jika Anda tidak setuju terikat dengan perubahan ini, Anda harus segera menghentikan semua akses dan/atau penggunaan laman ini. Lebih lanjut Anda setuju bahwa jika Anda berlanjut menggunakan dan/atau mengakses laman ini setelah diberitahukan adanya perubahan tersebut pada TOU ini, maka penggunaan dan/atau akses tersebut akan membentuk:- (1) pengakuan tegas oleh Anda tentang TOU ini dan perubahannya; dan (2) persetujuan tegas oleh Anda untuk mematuhi dan terikat dengan TOU ini dan perubahannya.</li>
+                        <li><u class="bold">Kebijakan Privasi.</u> Dengan mengakses laman ini, Anda menyetujui bahwa kami dapat mengumpulkan dan menggunakan informasi tentang Anda dan penggunaan Anda atas laman ini sebagaimana tercantum dalam Kebijakan Privasi kami di [<a href="http://www.zuelligpharma.com/">http://www.zuelligpharma.com/</a> privacy].</li>
+                        <li><u class="bold">Penggunaan Laman Ini.</u> Anda setuju mematuhi seluruh pemberitahuan, pedoman, peraturan dan instruksi yang berhubungan dengan penggunaan laman ini sebagaimana diterbitkan oleh Zuellig Pharma dari waktu ke waktu.</li>
+                        <li><u class="bold">Tautan.</u> Laman ini juga memuat tautan ke laman lain, termasuk laman yang dimiliki afiliasi kami. Laman lain ini dapat atau bisa jadi tidak dimiliki atau dioperasikan oleh Zuellig Pharma, dan setiap tautan ke laman lain tersebut disediakan hanya untuk informasi dan kemudahan saja. Penggunaan Anda atas laman lain tersebut sepenuhnya resiko Anda sendiri. Anda mengakui dan menyetujui bahwa Zuellig Pharma tidak menelaah setiap atau seluruh laman lain tersebut dan tidak bertanggungjawab dengan cara apapun atas konten, layanan, praktek privasi dan/atau setiap aspek lainnya dari laman lain tersebut atau atas keakuratan, ketepatan waktu atau ketersediaan yang berkelanjutan atau eksistensi konten, tautan atau laman pihak ketiga atau halaman yang ditautkan ke atau dari laman kami. Zuellig Pharma tidak mengesahkan dan tidak bertanggungjawab atas konten atau materi pada atau yang disediakan melalui laman tersebut dan bahwa laman tersebut hanya boleh diakses dengan resiko yang ditanggung Anda sendiri.</li>
+                        <li><u class="bold">Konten Pihak Ketiga.</u> Informasi dan/atau konten dari berbagai sumber, termasuk penyedia konten pihak ketiga, dapat diposting dalam laman ini. Baik Zuellig Pharma maupun setiap penyedia konten tidak bertanggungjawab atas setiap kesalahan atau keterlambatan dalam melengkapi konten pada laman ini atau atas setiap tindakan yang diambil atasnya.</li>
+                        <li><u class="bold">Hak-Hak Kekayaan Intelektual.</u> Anda mengakui dan menyetujui bahwa seluruh hak, hak milik dan kepemilikan (termasuk hak-hak kekayaan intelektual) dalam dan pada konten laman ini dimiliki oleh dan akan tetap dimiliki oleh Zuellig Pharma dan bahwa Anda tidak berhak atasnya selain daripada hak mengakses dan menggunakan laman ini sesuai dengan persyaratan TOU ini. Kecuali secara tegas diberi kuasa oleh Zuellig Pharma secara tertulis, Anda setuju untuk tidak membuat salinan atau pekerjaan turunan berdasarkan konten laman ini atau setiap bagian darinya atau mendistribusikan, menerbitkan kembali, menampilkan, menyiarkan atau mengirimkan seluruh atau sebagian laman dan informasi serta materi yang dimuat didalamnya dengan cara apapun atau dengan sarana apapun atau menyimpan informasi tersebut dalam sistem penyimpanan informasi tanpa izin tertulis terlebih dahulu dari Zuellig Pharma. Anda menyetujui bahwa Anda tidak akan menggunakan robot, laba-laba, penggali data atau perangkat otomatis lainnya untuk mengakses laman ini untuk tujuan apapun tanpa izin tegas dan tertulis dari kami. Selain itu, Anda tidak boleh, tanpa izin tertulis terlebih dahulu dari Zuellig Pharma, menyisipkan hyperlink ke laman ini (atau setiap bagian darinya) pada setiap laman lain atau halaman lain atau "membayangi" setiap materi yang dimuat di laman ini pada setiap server lainnya dan Anda tidak boleh membentuk dan/atau menyimpan, di setiap laman atau halaman laman, setiap in-links, frame-links dan/atau setiap jenis hyperlinks pada laman ini atau setiap bagian darinya (termasuk tanpa batasan setiap halaman laman, gambar, video, audio, grafik, teks, kode, program dan/atau setiap materi lainnya pada laman ini). Merek dagang, merek jasa dan logo yang digunakan dan ditampilkan pada laman ini (termasuk tanpa batasan “Zuellig Pharma”, “zip-online” dan “AsiaRx”) (“Merek Dagang”) merupakan Merek Dagang Zuellig Pharma yang didaftarkan dan tidak didaftarkan. Tidak satupun dalam laman ini  ditafsirkan sebagai pemberian, melalui implikasi, perlindungan hukum, atau lainnya, setiap lisensi atau hak menggunakan setiap Merek Dagang yang ditampilkan pada laman ini tanpa izin tertulis dari Zuellig Pharma. Zuellig Pharma melarang penggunaan setiap Merek Dagang sebagai tautan “hot” ke setiap laman Zuellig Pharma atau setiap laman lainnya kecuali penetapan tautan tersebut dan penggunaan Merek Dagang tersebut disetujui sebelumnya oleh Zuellig Pharma secara tertulis. Gambar orang atau tempat yang ditampilkan pada laman ini merupakan milik atau digunakan melalui persetujuan oleh Zuellig Pharma. Penggunaan gambar ini oleh Anda atau orang lain yang diberi kuasa oleh Anda, dilarang kecuali secara khusus diperbolehkan oleh TOU ini atau izin khusus yang ditetapkan secara tertulis oleh Zuellig Pharma. Setiap penggunaan gambar yang tidak sah dapat melanggar undang-undang hak cipta, undang-undang merek dagang, undang-undang privasi dan publisitas serta peraturan dan undang-undang tentang komunikasi. Seluruh informasi, metode, proses, pengetahuan procedural atau teknologi lain yang diungkapkan dalam laman ini dimiliki oleh Zuellig Pharma dan tidak satupun dalam laman ini akan ditafsirkan sebagai pemberian, melalui implikasi, perlindungan hukum atau lainnya, setiap lisensi atau hak menggunakan hal yang sama tanpa izin tertulis dari Zuellig Pharma.</li>
+                        <li><u class="bold">Penangguhan Laman.</u> Zuellig Pharma dapat, dari waktu ke waktu tanpa memberikan alasan apapun atau sebelum pemberitahuan, memperbarui, memodifikasi, mengubah, menangguhkan, menghentikan ketentuan atau menghapus, baik seluruhnya atau sebagian, laman ini dan setiap layanan atau informasi didalamnya dan tidak bertanggungjawab jika setiap pengkinian, modifikasi, penangguhan atau perubahan pada laman ini menghalangi Anda untuk mengakses laman ini atau setiap bagian atau fitur laman tersebut. Informasi dan/atau setiap materi lain yang dimuat dalam laman ini dapat diubah, dihapus atau diganti dari waktu ke waktu dan setiap saat atas kebijakan mutlak Zuellig Pharma.</li>
+                        <li><u class="bold">Kepatuhan terhadap Hukum.</u> Anda menyetujui bahwa Anda akan mengakses dan menggunakan laman ini secara ketat sesuai dengan seluruh hukum dan perundang-undangan yang berlaku.</li>
+                        <li><u class="bold">SANGGAHAN JAMINAN.</u> Seluruh informasi yang tersedia dimaksudkan bersifat umum dan tidak dapat diandalkan dalam membuat keputusan apapun. Sementara Zuellig Pharma berusaha memastikan bahwa informasi yang tersedia dalam laman ini akurat pada saat diposting, hal tersebut tidak dapat menjamin hal yang sama. Zuellig Pharma tidak berkewajiban apapun untuk memperbarui informasi yang dimuat dalam laman ini. ANDA MENYETUJUI BAHWA LAMAN INI DAN SELURUH INFORMASI, MATERI, LAYANAN DAN FUNGSI YANG DIMUAT DIDALAMNYA (TERMASUK PERANGKAT LUNAK, PROGRAM, DATA, BASIS DATA, TEKS, GRAFIK, FOTOGRAFIS, ANIMASI, AUDIO, MUSIK, VIDEO, TAUTAN ATAU MATERI LAINNYA) DISEDIAKAN KEPADA ANDA “APA ADANYA, SEBAGAIMANA TERSEDIA" DAN BAHWA ANDA MENGAKSES DAN MENGGUNAKAN LAMAN INI ATAS RESIKO SENDIRI. ANDA MENGAKUI DAN MENYETUJUI BAHWA ZUELLIG PHARMA TIDAK MEMBUAT PERNYATAAN ATAU JAMINAN APAPUN TERKAIT LAMAN INI, BAIK TERSIRAT MAUPUN TERSURAT, MENURUT UNDANG-UNDANG ATAU LAINNYA, TERMASUK TANPA DIBATASI OLEH SETIAP JAMINAN ATAU KONDISI KESELARASAN UNTUK TUJUAN KHUSUS APAPUN, BEBAS DARI VIRUS KOMPUTER ATAU KODE, AGEN, PROGRAM ATAU MAKROS YANG BERBAHAYA, BERSIFAT MERUSAK ATAU KURANG SEMPURNA, MEMENUHI SYARAT MUTU, KELAYAKAN BARANG DAGANGAN, KETIADAAN PELANGGARAN HAK PIHAK KETIGA, PEMANFAATAN ATAU KETEPATAN WAKTU, SEMUA HAL TERSEBUT DENGAN INI SECARA TEGAS DIKECUALIKAN SEPANJANG DIPERBOLEHKAN SEPENUHNYA MENURUT HUKUM. TANPA MEMBATASI HAL TERSEBUT DIATAS, ANDA MENYETUJUI BAHWA ZUELLIG PHARMA TIDAK MENJAMIN BAHWA (I) LAMAN INI ATAU MATERI ATAU INFORMASI YANG TERSEDIA DIDALAMNYA AKAN MEMENUHI KEBUTUHAN ANDA; (II) AKSES KE LAMAN INI AKAN TIDAK TERGANGGU, TEPAT WAKTU, AMAN, ATAU BEBAS DARI KESALAHAN ATAU BAHWA SETIAP CACAD YANG TERIDENTIFIKASI AKAN DIPERBAIKI; DAN (III) KONTEN LAMAN INI AKURAT, TERKINI, LENGKAP ATAU DAPAT DIPERCAYA DAN (IV) PENGGUNAAN INFORMASI DAN MATERI YANG DITAMPILKAN PADA LAMAN INI TIDAK MELANGGAR HAK PARA PIHAK KETIGA.</li>
+                        <li><u class="bold">PEMBATASAN TANGGUNG JAWAB.</u> ANDA MENYETUJUI BAHWA ZUELLIG PHARMA TIDAK BERTANGGUNGJAWAB ATAS SETIAP KERUGIAN LANGSUNG, KERUGIAN YANG DIAKIBATKANNYA, INSIDENTAL, EKONOMIS ATAU KHUSUS, TERMASUK TANPA DIBATASI PADA, KERUGIAN ATAS KEHILANGAN LABA, ITIKAD BAIK, PENGGUNAAN, DATA ATAU KERUGIAN TAK BERWUJUD LAINNYA, BAGAIMANAPUN TIMBULNYA, TERMASUK KERUSAKAN, KERUGIAN DAN PENGELUARAN YANG TIMBUL DARI ATAU SEHUBUNGAN DENGAN (i) SETIAP AKSES, PENGGUNAAN ATAU KETIDAKMAMPUAN MENGAKSES ATAU MENGGUNAKAN LAMAN INI; (ii) SETIAP SISTEM, SERVER ATAU KEGAGALAN KONEKSI, KESALAHAN, PENGHILANGAN, GANGGUAN, KETERLAMBATAN PENGIRIMAN, VIRUS KOMPUTER ATAU KODE, AGEN, PROGRAM ATAU MAKROS YANG BERBAHAYA, BERSIFAT MERUSAK ATAU KURANG SEMPURNA; (iii) SETIAP PENGGUNAAN ATAU AKSES KE SETIAP LAMAN LAINNYA ATAU HALAMAN LAMAN YANG DITAUTKAN KE LAMAN INI; ATAU (iv) SETIAP LAYANAN, PRODUK, INFORMASI,  DATA, PERANGKAT LUNAK ATAU MATERI LAIN YANG DIPEROLEH ATAU DIUNDUH DARI LAMAN INI ATAU DARI LAMAN LAIN ATAU HALAMAN LAMAN YANG DITAUTKAN DENGAN LAMAN INI ATAU DARI SETIAP PIHAK LAIN YANG DIRUJUK OLEH LAMAN INI, BAHKAN KETIKA ZUELLIG PHARMA TELAH DIBERITAHUKAN MENGENAI KEMUNGKINAN KERUGIAN TERSEBUT.</li>
+                        <li><u class="bold">Gantirugi.</u> Anda setujuu untuk sepenuhnya memberikan gantirugi dan membebaskan Zuellig Pharma dari dan terhadap setiap dan seluruh klaim, tindakan, proses hukum, kerugian, pengeluaran, biaya dan kewajiban yang ditimbulkan oleh atau ditujukan ke Zuellig Pharma sehubungan dengan atau yang timbul dari penggunaan Anda atas laman ini, pelanggaran Anda terhadap TOU ini atau pelanggaran Anda terhadap hak-hak pihak ketiga manapun.</li>
+                        <li><u class="bold">Pemberitahuan.</u> Anda menyetujui bahwa setiap pemberitahuan dapat dikirimkan kepada Anda melalui email atau dengan memasukkan ke laman ini dan bahwa pemberitahuan tersebut akan dianggap telah diterima oleh Anda, jika dikirim melalui email, dianggap diterima 24 jam setelah email tersebut telah dikirimkan oleh server email Zuellig Pharma, atau, jika diposting ke laman ini, dianggap telah diterima 48 jam setelah posting tersebut dilakukan.</li>
+                        <li><u class="bold">Keterpisahan.</u> Jika setiap ketentuan TOU ini atau bagian darinya dianggap tidak sah, tidak berlaku atau tidak dapat dilaksanakan oleh setiap undang-undang yang dikenakan atasnya, maka ketentuan tersebut akan dianggap tidak sah, tidak berlaku atau tidak dapat dilaksanakan sepanjang hal itu dan tidak mempengaruhi atau mengesampingkan keberlakuan ketentuan selebihnya atau ketentuan lain dari TOU ini dengan cara apapun. Ketidak-absahan, ketidakberlakuan atau  tidak dapat dilaksanakannya setiap ketentuan dalam TOU ini berdasarkan undang-undang di satu yurisdiksi tidak akan mempengaruhi keabsahan, keberlakuan dan pelaksanaan ketentuan tersebut berdasarkan undang-undang di setiap yurisdiksi lainnya.</li>
+                        <li><u class="bold">Pengesampingan.</u> Setiap kegagalan atau keterlambatan yang dilakukan oleh Zuellig Pharma untuk melaksanakan atau memberlakukan setiap hak atau ketentuan TOU ini tidak akan membentuk pengesampingan atas hak atau ketentuan tersebut.</li>
+                        <li><u class="bold">Tidak ada hak pihak ketiga.</u> Anda menyetujui bahwa, kecuali secara tegas ditetapkan dalam TOU ini, tidak satupun Pihak Ketiga akan memiliki hak apapun dalam Undang-Undang Perjanjian Kontrak (Hak-Hak Pihak Ketiga) (Pasal 53B) untuk memberlakukan setiap persyaratan TOU ini.</li>
+                        <li><u class="bold">Hukum yang Mengatur dan Yurisdiksi.</u> Anda menyetujui bahwa TOU ini dan akses Anda pada dan penggunaan laman ini diatur oleh hukum Singapura (termasuk tanpa batasan, ketentuan Undang-Undang Pembuktian (Pasal 97) dan Undang-Undang Transaksi Elektronik (No 25. tahun 1998) dan Anda setuju menyerahkan ke yurisdiksi non-eksklusif di pengadilan Singapura.</li>
+                        <li><u class="bold">Catatan.</u> Anda mengakui dan menyetujui bahwa catatan Zuellig Pharma dan setiap catatan akses Anda ke, dan komunikasi, transaksi, instruksi atau operasi yang dibuat atau dilakukan, diproses atau diberlakukan melalui laman ini oleh Anda atau setiap orang yang diakui oleh Anda, bertindak atas nama Anda atau bermaksud bertindak atas nama Anda, dengan atau tanpa persetujuan Anda, atau setiap catatan komunikasi, transaksi, instruksi atau operasi yang berhubungan dengan pengoperasian laman dan setiap catatan komunikasi, transaksi atau pengoperasian yang disimpan oleh Zuellig Pharma atau oleh setiap pihak terkait yang diberi kuasa oleh Zuellig Pharma terkait atau sehubungan dengan laman ini akan mengikat Anda untuk semua tujuan apapun dan akan merupakan bukti yang menguatkan atas komunikasi, transaksi, instruksi atau pengoperasian tersebut. Anda menyetujui bahwa catatan tersebut dapat diterima sebagai bukti dan bahwa Anda tidak akan menantang atau memperselisihkan penerimaan, keterandalan, keakuratan atau keaslian isi catatan tersebut hanya atas dasar bahwa catatan tersebut berbentuk elektronik atau digandakan oleh atau merupakan keluaran dari sistem komputer dan dengan ini mengesampingkan setiap hak Anda (jika ada) untuk mengajukan keberatan atas hal tersebut.</li>
+                        <li><u class="bold">Keadaan Kahar.</u> Zuellig Pharma tidak bertanggungjawab atas ketiadaan pelaksanaan, kesalahan, gangguan atau keterlambatan dalam pengoperasian laman ini (atau setiap bagian daripadanya) atau atas ketidak-akuratan, ketidak-terandalan atau ketidaksesuaian konten laman tersebut jika hal ini telah jatuh tempo, baik secara menyeluruh atau sebagian, secara langsung atau tidak langsung atas satu peristiwa atau kegagalan yang diluar kendali wajar, termasuk tanpa batasan:- (i) banjir, petir, takdir Tuhan, kebakaran, gempa bumi dan bencana alam lainnya (ii) putusan, tindakan, perintah, petunjuk, kebijakan, batasan, kesepakatan tertulis, larangan atau tindakan pencegahan apapun yang dilakukan oleh setiap pengadilan, pemerintah, parlemen dan/atau badan regulasi yang ditimbulkan atau akan ditimbulkan setelah adanya fakta (iii) gangguan sumber daya (iv) tindakan atau wanprestasi operator jaringan komunikasi (v) keadaan dimana saluran komunikasi untuk sistem komputer Zuellig Pharma (baik yang ada di Singapura atau dimana saja) tidak dapat digunakan karena alasan yang disebabkan oleh perusahaan pengangkut telekomunikasi pihak ketiga dan (vi) tindakan atau kelalaian yang dilakukan oleh pihak ketiga manapun.</li>
+                    </ol>
+                    <p>Persyaratan Penggunaan Versi 2.0 ini dibuat pada tanggal: 1 September, 2007.</p>
+                    <p>(Sumber: <a href="https://aplcare.com/legal-disclaimer">aplcare.com/legal-disclaimer</a>)</p>
+                    <h4 class="margin-top-20">PRIVASI</h4>
+                    <h5><u>KEBIJAKAN PRIVASI</u></h5>
+                    <ol>
+                        <li><u class="bold">Kebijakan Privasi.</u> Kebijakan Privasi ini mencantumkan praktek yang telah diterapkan oleh Zuellig Pharma sehubungan dengan pengumpuilan informasi melalui laman ini dan penggunaan informasi tersebut oleh kami . Dengan mengakses laman kami, Anda menyetujui bahwa kami dapat mengumpulkan informasi tentang Anda dan penggunaan Anda atas laman kami dan bahwa kami dapat menggunakan informasi ini sesuai dengan Kebijakan Privasi ini. Jika Anda tidak menyetujui Kebijakan Privasi ini, silakan Anda menghentikan akses Anda dengan segera. </li>
+                        <li><u class="bold">Tautan.</u> Laman kami juga memuat tautan ke laman lain, termasuk laman yang dimiliki oleh afiliasi kami yang dapat atau tidak dimiliki atau dioperasikan oleh Zuellig Pharma. Penggunaan Anda terhadap setiap laman lain tersebut sepenuhnya resiko Anda sendiri. Kami menyediakan tautan ke laman lain tersebut untuk kepentingan informasi dan kemudahan saja. Tidak ada pengesahan atas laman pihak ketiga manapun atau konten oleh Zuellig Pharma yang akan diterapkan. Anda mengakui dan menyetujui bahwa Zuellig Pharma tidak menelaah setiap atau seluruh laman lain tersebut dan tidak bertanggungjawab dengan cara apapun atas konten atau praktek kebijakan laman atau halaman yang ditautkan kea tau dari laman kami dan kami juga tidak bertanggungjawab atas keakuratan, ketepatan waktu atau ketersediaan yang berkelanjutan atau eksistensi konten, tautan atau laman pihak ketiga atau halaman yang ditautkan ke atau dari laman kami . Zuellig Pharma tidak bertanggungjawab atau berkewajiban atas konten atau materi pada atau yang dibuat melalui laman tersebut. Kami akan mendorong dan merekomendasikan agar Anda menelaah syarat-syarat dan kebijakan privasi laman tersebut.</li>
+                        <li><u class="bold">Perubahan terhadap Kebijakan Privasi.</u> Anda mengakui dan menyetujui bahwa Zuellig Pharma dapat mengenakan syarat dan ketentuan lebih lanjut dan membuat perubahan pada Kebijakan Privasi ini sebagaimana dapat dianggap layak dari waktu ke waktu oleh Zuellig Pharma, atas kebijakannya. Oleh karenanya, kami meminta Anda menandai dan secara berkala menelaah halaman ini untuk memastikan pemahaman yang berkelanjutan dengan versi terbaru Kebijakan Privasi kami.</li>
+                        <li><u class="bold">Tanpa Informasi Pribadi.</u> Sementara Anda sedang menjelajah laman kami, kami mengumpulkan informasi yang tidak mengidentifikasi Anda secara pribadi, termasuk informasi pada halaman laman yang telah Anda kunjungi dan yang hyperlink tersebut "diklik". Berbagai metode digunakan untuk mengumpulkan informasi ini, termasuk penggunaan "cookies". Cookies adalah berkas teks kecil yang tersimpan di komputer Anda dan tidak mengandung kode apapun yang dapat dieksekusi. Namun demikian, jika Anda memiliki masalah apapun terkait penggunaan cookies, Anda harus dapat membuat konfigurasi peramban laman Anda untuk menolak cookies tersebut. Silakan lihat dokumentasi peramban Anda untuk memperoleh informasi tentang cara melakukan hal ini.</li>
+                        <li><u class="bold">Informasi Pribadi.</u> Selain itu, untuk menggunakan area tertentu di laman kami – misalnya, pada saat mengirimkan umpan-balik keZuellig Pharma – kami meminta, namun tidak mewajibkan Anda untuk menyediakan informasi kepada kami yang dapat mengidentifikasi Anda secara pribadi (termasuk nama, alamat, alamat email dan rincian kontak Anda lainnya). Namun begitu, Anda mengakui bahwa jika Anda memilih tidak menyediakan informasi sebagaimana diminta dalam laman kami, kami tidak dapat memproses permintaan Anda dan/atau Anda tidak dapat menggunakan atau mengakses area tertentu dari laman kami. Dengan tidak mengesampingkan Klausul 6 di bawah ini, kami dapat mengungkapkan informasi pribadi apapun yang telah disediakan ke kami sebagaimana dipersyaratkan oleh hukum atau perintah pengadilan atau sebagaimana diminta oleh badan pemerintah atau badan penegakan hukum lainnya.</li>
+                        <li><u class="bold">Tanpa Kerahasiaan.</u> Anda menyetujui bahwa seluruh informasi dan/atau keterangan lengkap yang dikirimkan atau diserahkan oleh Anda melalui laman ini bersifat tidak rahasia dan bukan kepemilikan, kecuali secara tegas dinyatakan lain oleh Anda. Anda mengakui bahwa Zuellig Pharma berikut para afiliasi, para direktur, para pejabat, para karyawan, para kontraktor dan para agen tidak dikenakan kewajiban kerahasiaan apapun sehubungan dengan setiap informasi dan/atau keterangan lengkap tersebut dan Anda menyetujui bahwa Zuellig Pharma berikut para afiliasi, para direktur, para pejabat, para karyawan, para kontraktor dan para agen dapat, dan Anda dengan ini memberikan kuasa kepada masing-masing mereka untuk menggunakan dan mengungkapkan informasi tersebut ke pihak manapun (termasuk tanpa batasan setiap penyedia jasa pihak ketiga dan/atau setiap pihak yang diakui oleh Anda) sehubungan dengan bisnis dan ketentuan laman ini.</li>
+                        <li><u class="bold">Penggunaan Informasi yang Tidak Bersifat Pribadi.</u> Informasi yang tidak bersifat pribadi yang kami terima dikumpulkan dan diserahkan untuk dianalisa secara statistik. Hal ini membuat kami dapat mengukur tingkat kepentingan untuk setiap area khusus di laman kami dan meningkatkan layanan yang disediakan oleh laman kami. Untuk kepentingan ini, kami dapat menyediakan informasi yang diperlukan kepada pihak ketiga.</li>
+                        <li><u class="bold">Penggunaan Informasi Pribadi.</u> Dengan tanpa mengesampingkan Klausul 6, kami dapat berbagi setiap informasi pribadi yang telah disediakan oleh Anda sehubungan dengan atau dalam laman ini atau dikirimkan oleh Anda ke rincian kontak kami yang tersedia di laman dengan afiliasi dan para pihak ketiga kami sebagaimana kami anggap layak, untuk kepentingan bisnis internal kami dan/atau sehingga kami dapat melayani Anda seefektif dan seefisien mungkin. Sementara kami mendorong seluruh pihak untuk siapa informasi tersebut diungkapkan agar mematuhi kebijakan privasi kami, kami tidak dapat atau tidak bertanggungjawab atas kegagalan mereka atau penolakan untuk berbuat demikian atau atas setiap tindakan atau kelalaian lain yang dilakukan oleh para pihak ketiga, termasuk cara dimana mereka menggunakan informasi tersebut (termasuk informasi pribadi Anda) yang telah diterima baik melalui Zuellig Pharma atau secara independen.</li>
+                        <li><u class="bold">Cara Penggunaan Lainnya.</u> Kami berhak menggunakan dan/atau mengungkapkan informasi yang kami kumpulkan dengan cara yang dianggap layak apabila pengunjung melanggar Syarat-Syarat Penggunaan atau pedoman lain yang telah dipublikasikan, atau dilibatkan (atau yang sewajarnya diduga terlibat) dalam setiap kegiatan melanggar hukum, bahkan tanpa panggilan, surat waran atau perintah pengadilan apapun. Kami juga harus mematuhi setiap perintah pengadilan atau pemerintah atau sebagaimana dipersyaratkan lain oleh undang-undang. Kami juga berhak melaporkan setiap kegiatan melanggar hukum ke badan penegakan hukum untuk diselidiki atau dituntut lebih lanjut. Selain itu, Anda mengakui dan menyetujui bahwa kami dapat menjual atau mengalihkan aset atau bagian dari bisnis kami yang dapat mencakup informasi pengunjung (baik informasi yang bersifat pribadi maupun tidak) tanpa persetujuan Anda.</li>
+                        <li><u class="bold">Perubahan atas Informasi Pribadi.</u> Anda dapat mengajukan permintaan akses ke dan pembetulan setiap informasi pribadi Anda. Jika Anda ingin meminta informasi pribadi Anda dihapus dari basis data kami atau jika Anda ingin membuat perubahan apapun atas informasi tersebut, silakan hubungi kami melalui help@zuelligpharma.com. Sementara kami akan berupaya sekuat tenaga untuk memenuhi permintaan Anda, kami berhak, dalam hal permintaan perubahan tersebut, menghapus informasi pribadi Anda secara bergantian dari basis data kami.</li>
+                        <li><u class="bold">Informasi Lebih Lengkap.</u> Jika Anda memiliki pertanyaan seputar Kebijakan Privasi ini atau Anda ingin melaporkan suatu pelanggaran atas Kebijakan Privasi kami, silakan email ke  help@zuelligpharma.com.</li>
+                        <li><u class="bold">Hukum yang Mengatur dan Yurisdiksi.</u> Anda menyetujui bahwa Kebijakan Privasi ini dan penggunaan laman kami diatur oleh hukum Singapura dan Anda setuju menyerahkan ke yurisdiksi non-eksklusif di pengadilan Singapura.</li>
+                    </ol>
+                    <p>Kebijakan Privasi versi 2.0 ini dibuat pada tanggal: 1 September, 2007.</p>
+                    <p>(Sumber: <a href="https://aplcare.com/privacy">aplcare.com/privacy</a>) </p>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>*@
+    <!-- END COPYRIGHT -->
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <!--[if lt IE 9]>
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/plugins/respond.min.js"></script>
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/plugins/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/select2/select2.min.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="@SiteHelper.GetBaseUrl()Assets/global/scripts/metronic.js" type="text/javascript"></script>
+    <script src="@SiteHelper.GetBaseUrl()Assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+    <script src="@SiteHelper.GetBaseUrl()Assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+    <script src="@SiteHelper.GetBaseUrl()Assets/admin/pages/scripts/login-soft.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <script>
+    jQuery(document).ready(function() {
+        Metronic.init(); // init metronic core components
+        Layout.init(); // init current layout
+           // init background slide images
+           $.backstretch([
+            "@SiteHelper.GetBaseUrl()Assets/admin/pages/media/bg/1.jpg",
+            "@SiteHelper.GetBaseUrl()Assets/admin/pages/media/bg/2.jpg",
+            "@SiteHelper.GetBaseUrl()Assets/admin/pages/media/bg/3.jpg",
+            "@SiteHelper.GetBaseUrl()Assets/admin/pages/media/bg/4.jpg"
+            ], {
+              fade: 1000,
+              duration: 8000
+            }
+        );
+
+        var $formLogin = $('.login-form');
+
+        $formLogin.validate({
+            errorElement: 'span', //default input error message container
+            errorClass: 'help-block help-block-error', // default input error message class
+            focusInvalid: false, // do not focus the last invalid input
+            ignore: "",  // validate all fields including form hidden input
+            rules: {
+                Username: {
+                    required: true,
+                },
+                Password: {
+                    required: true,
+                },
+            },
+            messages: {},
+            invalidHandler: function (event, validator) { //display error alert on form submit
+                //Metronic.scrollTo($form, -200);
+            },
+            errorPlacement: function (error, element) {
+                if ($(element).attr('type') == 'checkbox') {
+                    error.insertAfter($(element).closest('.checkbox-list'));
+                }
+                else {
+                    error.insertAfter($(element));
+                }
+            },
+            highlight: function (element) { // hightlight error inputs
+                var fieldName = $(element).attr('name');
+
+                $(element).closest('.form-group').addClass('has-error'); // set error class to the control group
+            },
+
+            unhighlight: function (element) { // revert the change done by hightlight
+                $(element).closest('.has-error').removeClass('has-error'); // set error class to the control group
+            },
+
+            success: function (label) {
+                label.closest('.has-error').removeClass('has-error'); // set success class to the control group
+            },
+
+            submitHandler: function (form) {
+                //if ($('input[name="toc"]').is(":checked") == false) {
+                //    return false;
+                //}
+
+                $(form).find('.form-actions .btn[type="submit"]').addClass('loading');
+                $(form).find('.form-actions .btn').attr('disabled', 'disabled');
+                form.submit();
+            }
+        });
+
+        $formLogin.find('input').keypress(function (e) {
+            if (e.keyCode == 13) {
+                $formLogin.find('.form-actions .btn').trigger('click');
+            }
+        });
+
+        $('input[name="toc"]').on('change', function () {
+            if (this.checked) {
+                $formLogin.find('button[type="submit"]').removeAttr('disabled');
+            }
+            else {
+                $formLogin.find('button[type="submit"]').attr('disabled', 'disabled');
+            }
+        });
+
+        $('#btn-toc').on('click', function () {
+            $('#modal-toc').modal('show');
+        });
+    });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,267 @@
+﻿@using Radyalabs.Core
+@using AIDA.Master.Service.Models
+@using AIDA.Master.Infrastucture.Constants
+@{
+    UserAuthenticated userAuth = ViewBag.UserAuth as UserAuthenticated;
+
+    List<SidebarMenuModel> listMenu = new List<SidebarMenuModel>();
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "dashboard",
+        Title = "Dashboard",
+        Module = null,
+        Icon = "icon-home",
+        Url = Url.Action("Index", "Dashboard")
+    });
+
+    //if ("NSM".Equals(ViewBag.UserAuth.RoleCode))
+    //{
+    //    listMenu.Add(new SidebarMenuModel()
+    //    {
+    //        Id = "report|incentive-sales",
+    //        Title = "Incentive Sales",
+    //        Module = ModuleCode.IncentiveSales,
+    //        Icon = "icon-trophy",
+    //        Url = Url.Action("Index", "IncentiveSales")
+    //    });
+
+    //    listMenu.Add(new SidebarMenuModel()
+    //    {
+    //        Id = "report|incentive-collection",
+    //        Title = "Incentive Collection",
+    //        Module = ModuleCode.IncentiveCollection,
+    //        Icon = "icon-social-dropbox",
+    //        Url = Url.Action("Index", "IncentiveCollection")
+    //    });
+    //}
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "report",
+        Title = "Report",
+        Module = ModuleCode.Report,
+        Icon = "icon-grid",
+        Url = "javascript:void(0)",
+        ListSubMenu = new List<SidebarMenuModel>()
+        {
+            new SidebarMenuModel()
+            {
+                Id = "incentive-sales",
+                Title = "Incentive Sales",
+                Module = ModuleCode.IncentiveSales,
+                Url = Url.Action("Index", "IncentiveSales")
+            },
+            new SidebarMenuModel()
+            {
+                Id = "incentive-collection",
+                Title = "Incentive Collection",
+                Module = ModuleCode.IncentiveCollection,
+                Url = Url.Action("Index", "IncentiveCollection")
+            },
+            new SidebarMenuModel()
+            {
+                Id = "incentive-collection-col",
+                Title = "Incentive Collection : Collector",
+                Module = ModuleCode.IncentiveCollectionCollector,
+                Url = Url.Action("Index", "IncentiveCollectionCollector")
+            },
+            new SidebarMenuModel()
+            {
+                Id = "incentive-collection-fak",
+                Title = "Incentive Collection : Fakturis",
+                Module = ModuleCode.IncentiveCollectionFakturis,
+                Url = Url.Action("Index", "IncentiveCollectionFakturis")
+            },
+            new SidebarMenuModel()
+            {
+                Id = "incentive-collection-spv",
+                Title = "Incentive Collection :<br/>SPV Fakturis",
+                Module = ModuleCode.IncentiveCollectionSPVFakturis,
+                Url = Url.Action("Index", "IncentiveCollectionSPVFakturis")
+            }
+        }
+    });
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "mastersales",
+        Title = "Master Sales",
+        Module = ModuleCode.MasterSales,
+        Icon = "icon-basket-loaded",
+        Url = "javascript:;",
+        ListSubMenu = new List<SidebarMenuModel>()
+        {
+            new SidebarMenuModel()
+            {
+                Id = "mastersales-hier",
+                Title = "Hirarki",
+                Module = ModuleCode.MasterSalesHier,
+                Url = Url.Action("Index", "HierSales")
+            },
+            new SidebarMenuModel()
+            {
+                Id = "mastersales-list",
+                Title = "Master List",
+                Module = ModuleCode.MasterSalesList,
+                Url = Url.Action("Index", "MasterListSales")
+            },
+            new SidebarMenuModel()
+            {
+                Id = "mastersales-target",
+                Title = "Target Sales",
+                Module = ModuleCode.MasterSalesTarget,
+                Url = Url.Action("Index", "TargetSales")
+            }
+        }
+    });
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "mastertagih",
+        Title = "Master Tagih",
+        Module = ModuleCode.MasterTagih,
+        Icon = "icon-handbag",
+        Url = "javascript:;",
+        ListSubMenu = new List<SidebarMenuModel>()
+        {
+            new SidebarMenuModel()
+            {
+                Id = "mastertagih-hier",
+                Title = "Hirarki",
+                Module = ModuleCode.MasterTagihHier,
+                Url = Url.Action("Index", "HierTagih")
+            },
+            new SidebarMenuModel()
+            {
+                Id = "mastertagih-list",
+                Title = "Master List",
+                Module = ModuleCode.MasterTagihList,
+                Url = Url.Action("Index", "MasterListTagih")
+            }
+        }
+    });
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "asm",
+        Title = "ASM",
+        Module = ModuleCode.ASM,
+        Icon = "icon-user",
+        Url = Url.Action("Index", "ASM")
+    });
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "supervisor",
+        Title = "Supervisor",
+        Module = ModuleCode.Supervisor,
+        Icon = "icon-user",
+        Url = Url.Action("Index", "Supervisor")
+    });
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "salesman",
+        Title = "Salesman",
+        Module = ModuleCode.Salesman,
+        Icon = "icon-user",
+        Url = Url.Action("Index", "Salesman")
+    });
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "collector",
+        Title = "Collector",
+        Module = ModuleCode.Collector,
+        Icon = "icon-user",
+        Url = Url.Action("Index", "Collector")
+    });
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "fakturis",
+        Title = "Fakturis",
+        Module = ModuleCode.Fakturis,
+        Icon = "icon-user",
+        Url = Url.Action("Index", "Fakturis")
+    });
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "spvfakturis",
+        Title = "SPV Fakturis",
+        Module = ModuleCode.SPVFakturis,
+        Icon = "icon-user",
+        Url = Url.Action("Index", "SPVFakturis")
+    });
+
+    //listMenu.Add(new SidebarMenuModel()
+    //{
+    //    Id = "import-collection",
+    //    Title = "Upload Collection",
+    //    Module = ModuleCode.ImportCollection,
+    //    Icon = " icon-book-open",
+    //    Url = Url.Action("Index", "Collection")
+    //});
+
+    listMenu.Add(new SidebarMenuModel()
+    {
+        Id = "wi",
+        Title = "Working Instruction",
+        Module = ModuleCode.WorkingInstruction,
+        Icon = " icon-book-open",
+        Url = Url.Action("DownloadWI", "Utility")
+    });
+
+    string[] arrActiveMenu = new string[] { };
+
+    if (ViewBag.ActiveMenu != null)
+    {
+        arrActiveMenu = ViewBag.ActiveMenu.Split('|');
+    }
+}
+<div class="page-sidebar-wrapper">
+    <div class="page-sidebar navbar-collapse collapse">
+        <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+            <li class="sidebar-search-wrapper">
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <form class="sidebar-search"></form>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+            @foreach (var menu in listMenu)
+            {
+                if (string.IsNullOrEmpty(menu.Module)
+                    || (userAuth.ListModule != null && userAuth.ListModule.Exists(x => x.Equals(menu.Module))))
+                {
+                    <li class="@(arrActiveMenu.Length > 0 && (menu.Id.Equals(ViewBag.ActiveMenu) || menu.Id.Equals(arrActiveMenu[0])) ? "open active" : "")">
+                        <a href="@menu.Url">
+                            <i class="@menu.Icon"></i>
+                            <span class="title">@Html.Raw(menu.Title)</span>
+                            @if (menu.Id.Equals(ViewBag.ActiveMenu))
+                            {
+                                <span class="selected"></span>
+                            }
+                        </a>
+                        @if (menu.ListSubMenu != null && menu.ListSubMenu.Count > 0)
+                        {
+                        <ul class="sub-menu">
+                            @foreach (var submenu in menu.ListSubMenu)
+                            {
+                                if (string.IsNullOrEmpty(submenu.Module)
+                                    || (userAuth.ListModule != null && userAuth.ListModule.Exists(x => x.Equals(submenu.Module))))
+                                {
+                                    <li class="@(arrActiveMenu.Length > 1 && submenu.Id.Equals(arrActiveMenu[1]) ? "active" : "")">
+                                        <a href="@submenu.Url">@Html.Raw(submenu.Title)</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+</div>
+<!-- END SIDEBAR -->

@@ -1,0 +1,28 @@
+﻿@using Radyalabs.Core.Helper
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_LayoutBody.cshtml";
+}
+
+@section PageStyle{
+    <link rel="stylesheet" type="text/css" href="@SiteHelper.GetBaseUrl()Assets/admin/pages/css/error.css" />
+}
+
+<body class="page-500-full-page">
+    <div class="row">
+        <div class="col-md-12 page-500">
+            <div class=" number">
+                500
+            </div>
+            <div class=" details">
+                <h3>Oops! Something went wrong.</h3>
+                <p>
+                    We are fixing it!
+                    <br> Please come back in a while.
+                </p>
+                <a class="btn btn-default" href="@SiteHelper.GetBaseUrl()">Return home</a>
+            </div>
+        </div>
+    </div>
+</body>

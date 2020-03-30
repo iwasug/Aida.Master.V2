@@ -1,0 +1,340 @@
+﻿@using Radyalabs.Core.Helper
+@using AIDA.Master.Infrastucture.Constants
+@model AIDA.Master.Service.Models.IncentiveCollectionReportViewModel
+@{
+    ViewBag.Title = "Incentive Collection";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.ActiveMenu = "report|incentive-collection";
+}
+
+@section PageStyle{
+    <link rel="stylesheet" type="text/css" href="@SiteHelper.GetBaseUrl()Assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" type="text/css" href="@SiteHelper.GetBaseUrl()Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="@SiteHelper.GetBaseUrl()Assets/global/plugins/select2/select2.css" />
+}
+
+@section PageScript{
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/select2/select2.js"></script>
+}
+
+@section CustomScript{
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/custom/js/_incentive-collection-index.js"></script>
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    Incentive Collection
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@SiteHelper.GetBaseUrl()"><i class="fa fa-home"></i></a>
+            <a href="@Url.Action("Index", "IncentiveCollection")">Incentive Collection</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <a id="btn-export-excel" class="btn btn-fit-height btn-sm green-stripe" href="javascript:;">
+            <i class="fa fa-file-excel-o"></i> Download
+        </a>
+        <form id="form-export" style="display: none" target="_blank" method="post" action="@Url.Action("ExportReport", "IncentiveCollection")">
+            <input type="hidden" name="p" value="@Model.FormattedMonthYear" />
+            <input type="hidden" name="b" value="@(Model.Plant == null ? "" : Model.Plant.Value.ToString())" />
+        </form>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+@Html.Partial("_FlashMessage")
+<div class="row">
+    <div class="col-md-12">
+        <form id="main-form" class="form-horizontal" role="form" action="@Url.Action("Index", "IncentiveCollection")" method="get">
+            <div class="form-group">
+                <label class="col-md-3 control-label">Bulan-Tahun <i class="required">*</i></label>
+                <div class="col-md-3">
+                    <div class="input-group input-small">
+                        <input class="form-control datepicker input-small text-center" type="text" name="p" value="@Model.FormattedMonthYear" readonly>
+                        <span class="input-group-btn">
+                            <button class="btn blue" type="submit"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+                @*@if (RoleCode.NSM.Equals(ViewBag.UserAuth.RoleCode))
+                {
+                    <label class="col-md-1 control-label">Cabang</label>
+                    <div class="col-md-3">
+                        <div class="input-group input-small">
+                            <select class="select2 form-control input-medium" name="b">
+                                <option>- Semua -</option>
+                                @if (ViewBag.ListBranch != null)
+                                {
+                                    foreach (var item in ViewBag.ListBranch)
+                                    {
+                                        <option value="@item.Code" @(Model.Plant != null && Model.Plant.Value == item.Code ? "selected" : "")>@(item.Code + " - " + item.Name)</option>
+                                    }
+                                }
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn blue" type="submit"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                }*@
+            </div>
+        </form>
+    </div>
+</div>
+<div class="tabbable-custom">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#tab-slm-raw" tabindex="-1" data-toggle="tab">
+                SLM Raw
+            </a>
+        </li>
+        @if (Model.IsEnableSummarySLM)
+        {
+            <li>
+                <a href="#tab-incentive-slm" tabindex="-1" data-toggle="tab">
+                    Incentive SLM
+                </a>
+            </li>
+        }
+        <li>
+            <a href="#tab-fss-raw" tabindex="-1" data-toggle="tab">
+                FSS Raw
+            </a>
+        </li>
+        @if (Model.IsEnableSummaryFSS)
+        {
+            <li>
+                <a href="#tab-incentive-fss" tabindex="-1" data-toggle="tab">
+                    Incentive FSS
+                </a>
+            </li>
+        }
+        @if (Model.IsQuarter)
+        {
+            <li>
+                <a href="#tab-asm-raw" tabindex="-1" data-toggle="tab">
+                    ASM Raw
+                </a>
+            </li>
+            if (Model.IsEnableSummaryASM)
+            {
+                <li>
+                    <a href="#tab-incentive-asm" tabindex="-1" data-toggle="tab">
+                        Incentive ASM
+                    </a>
+                </li>
+            }
+        }
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="tab-slm-raw">
+            <table class="datatable table table-striped table-bordered table-hover table-nowrap">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Description</th>
+                        <th style="text-align: center">NIK</th>
+                        <th>FullName</th>
+                        <th style="text-align: right">Total Target Collect</th>
+                        <th style="text-align: right">Total Actual Collect</th>
+                        <th style="text-align: right">Percentage Collection</th>
+                        <th style="text-align: right">Collection Incentive</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ListRawSLM != null && Model.ListRawSLM.Count > 0)
+                    {
+                        int i = 1;
+                        foreach (var item in Model.ListRawSLM)
+                        {
+                            <tr>
+                                <td align="right">@i</td>
+                                <td align="left">@item.Description</td>
+                                <td align="center">@item.NIK</td>
+                                <td align="left">@item.Fullname</td>
+                                <td align="right">@item.TotalTargetCollect.ToString("N0")</td>
+                                <td align="right">@item.TotalActualCollect.ToString("N0")</td>
+                                <td align="right">@item.PercentageCollection.ToString("N2")</td>
+                                <td align="right">@item.CollectionIncentives.ToString("N0")</td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (Model.IsEnableSummarySLM)
+        {
+            <div class="tab-pane fade" id="tab-incentive-slm">
+                <table class="datatable table table-striped table-bordered table-hover table-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th style="text-align: center">NIK</th>
+                            <th>FullName</th>
+                            <th style="text-align: right">Total Incentive</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ListSummarySLM != null && Model.ListSummarySLM.Count > 0)
+                        {
+                            int i = 1;
+                            foreach (var item in Model.ListSummarySLM)
+                            {
+                                <tr>
+                                    <td align="right">@i</td>
+                                    <td align="center">@item.NIK</td>
+                                    <td align="left">@item.Fullname</td>
+                                    <td align="right">@item.TotalIncentives.ToString("N0")</td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        <div class="tab-pane fade" id="tab-fss-raw">
+            <table class="datatable table table-striped table-bordered table-hover table-nowrap">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Description</th>
+                        <th style="text-align: center">NIK</th>
+                        <th>FullName</th>
+                        <th style="text-align: right">Total Target Collect</th>
+                        <th style="text-align: right">Total Actual Collect</th>
+                        <th style="text-align: right">Percentage Collection</th>
+                        <th style="text-align: right">Collection Incentive</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ListRawFSS != null && Model.ListRawFSS.Count > 0)
+                    {
+                        int i = 1;
+                        foreach (var item in Model.ListRawFSS)
+                        {
+                            <tr>
+                                <td align="right">@i</td>
+                                <td align="left">@item.Description</td>
+                                <td align="center">@item.NIK</td>
+                                <td align="left">@item.Fullname</td>
+                                <td align="right">@item.TotalTargetCollect.ToString("N0")</td>
+                                <td align="right">@item.TotalActualCollect.ToString("N0")</td>
+                                <td align="right">@item.PercentageCollection.ToString("N2")</td>
+                                <td align="right">@item.CollectionIncentives.ToString("N0")</td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (Model.IsEnableSummaryFSS)
+        {
+            <div class="tab-pane fade" id="tab-incentive-fss">
+                <table class="datatable table table-striped table-bordered table-hover table-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th style="text-align: center">NIK</th>
+                            <th>FullName</th>
+                            <th style="text-align: right">Total Incentive</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ListSummaryFSS != null && Model.ListSummaryFSS.Count > 0)
+                        {
+                            int i = 1;
+                            foreach (var item in Model.ListSummaryFSS)
+                            {
+                                <tr>
+                                    <td align="right">@i</td>
+                                    <td align="center">@item.NIK</td>
+                                    <td align="left">@item.Fullname</td>
+                                    <td align="right">@item.TotalIncentives.ToString("N0")</td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        @if (Model.IsQuarter)
+        {
+            <div class="tab-pane fade" id="tab-asm-raw">
+                <table class="datatable table table-striped table-bordered table-hover table-nowrap">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Description</th>
+                            <th style="text-align: center">NIK</th>
+                            <th>FullName</th>
+                            <th style="text-align: right">Total Target Collect</th>
+                            <th style="text-align: right">Total Actual Collect</th>
+                            <th style="text-align: right">Percentage Collection</th>
+                            <th style="text-align: right">Collection Incentive</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ListRawASM != null && Model.ListRawASM.Count > 0)
+                        {
+                            int i = 1;
+                            foreach (var item in Model.ListRawASM)
+                            {
+                                <tr>
+                                    <td align="right">@i</td>
+                                    <td align="left">@item.Description</td>
+                                    <td align="center">@item.NIK</td>
+                                    <td align="left">@item.Fullname</td>
+                                    <td align="right">@item.TotalTargetCollect.ToString("N0")</td>
+                                    <td align="right">@item.TotalActualCollect.ToString("N0")</td>
+                                    <td align="right">@item.PercentageCollection.ToString("N2")</td>
+                                    <td align="right">@item.CollectionIncentives.ToString("N0")</td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            if (Model.IsEnableSummaryASM)
+            {
+                <div class="tab-pane fade" id="tab-incentive-asm">
+                    <table class="datatable table table-striped table-bordered table-hover table-nowrap">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th style="text-align: center">NIK</th>
+                                <th>FullName</th>
+                                <th style="text-align: right">Total Incentive</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ListSummaryASM != null && Model.ListSummaryASM.Count > 0)
+                            {
+                                int i = 1;
+                                foreach (var item in Model.ListSummaryASM)
+                                {
+                                    <tr>
+                                        <td align="right">@i</td>
+                                        <td align="center">@item.NIK</td>
+                                        <td align="left">@item.Fullname</td>
+                                        <td align="right">@item.TotalIncentives.ToString("N0")</td>
+                                    </tr>
+                                    i++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+    </div>
+</div>

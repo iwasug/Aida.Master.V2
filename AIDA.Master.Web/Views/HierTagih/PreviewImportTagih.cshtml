@@ -1,0 +1,148 @@
+﻿@using Radyalabs.Core.Helper
+@model AIDA.Master.Service.Models.ImportTagihViewModel
+@{
+    ViewBag.Title = "Preview Upload Hirarki Tagih";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.ActiveMenu = "mastertagih|mastertagih-hier";
+
+    int numError = Model.ListHierTagih.Count(x=>!string.IsNullOrEmpty(x.Remarks));
+}
+
+@section PageStyle{
+    <link rel="stylesheet" type="text/css" href="@SiteHelper.GetBaseUrl()Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+}
+
+@section PageScript{
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+}
+
+@section CustomScript{
+    <script type="text/javascript" src="@SiteHelper.GetBaseUrl()Assets/custom/js/_hier-tagih-preview.js"></script>
+}
+
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title">
+    Preview Upload Hirarki Tagih
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a href="@SiteHelper.GetBaseUrl()"><i class="fa fa-home"></i></a>
+            <a href="@Url.Action("Index", "HierTagih")">Hirarki Tagih</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="@Url.Action("ImportTagih", "HierTagih")">Upload</a>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="javascript:;">Preview</a>
+        </li>
+    </ul>
+    <div class="page-toolbar">
+        <a id="btn-submit-preview" class="btn btn-fit-height btn-sm blue" @(numError > 0 ? "disabled" : "")>
+            <i class="fa fa-save"></i> Submit
+        </a>
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+@Html.Partial("_FlashMessage")
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            Valid Mulai : @Model.FormattedValidDate
+        </div>
+    </div>
+    <div class="portlet-body">
+        <table class="datatable table table-striped table-bordered table-hover table-nowrap">
+            <thead>
+                <tr>
+                    <th rowspan="2">#</th>
+                    <th rowspan="2">Status</th>
+                    <th rowspan="2" style="text-align: center">Rayon</th>
+                    <th rowspan="2" style="text-align: center">Cabang</th>
+                    <th colspan="2" style="text-align: center">KaCab</th>
+                    <th colspan="2" style="text-align: center">ASM</th>
+                    <th colspan="2" style="text-align: center">FSS</th>
+                    <th colspan="2" style="text-align: center">SLM</th>
+                    <th colspan="2" style="text-align: center">Collector</th>
+                    <th colspan="2" style="text-align: center">AR Controller</th>
+                    <th colspan="2" style="text-align: center">SPV AR Controller</th>
+                    <th rowspan="2">Keterangan</th>
+                </tr>
+                <tr>
+                    <th>NIK</th>
+                    <th>Nama</th>
+                    <th>NIK</th>
+                    <th>Nama</th>
+                    <th>NIK</th>
+                    <th>Nama</th>
+                    <th>NIK</th>
+                    <th>Nama</th>
+                    <th>NIK</th>
+                    <th>Nama</th>
+                    <th>NIK</th>
+                    <th>Nama</th>
+                    <th>NIK</th>
+                    <th>Nama</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 1; }
+                @foreach (var item in Model.ListHierTagih)
+                {
+                    <tr class="@(!string.IsNullOrEmpty(item.Remarks) ? "bg-red" : "")">
+                        <td align="right">@i</td>
+                        <td align="center">
+                            @if (!string.IsNullOrEmpty(item.Remarks))
+                            {
+                                <i class="fa fa-times"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-check font-green"></i>
+                            }
+                        </td>
+                        <td align="center">@item.RayonCode</td>
+                        <td align="center">@item.PlantCode</td>
+                        <td align="center">@item.NSMNik</td>
+                        <td align="left">@item.NSMFullname</td>
+                        <td align="center">@item.ASMNik</td>
+                        <td align="left">@item.ASMFullname</td>
+                        <td align="center">@item.FSSNik</td>
+                        <td align="left">@item.FSSFullname</td>
+                        <td align="center">@item.SLMNik</td>
+                        <td align="left">@item.SLMFullname</td>
+                        <td align="center">@item.CollectorNik</td>
+                        <td align="left">@item.CollectorFullname</td>
+                        <td align="center">@item.FakturisNik</td>
+                        <td align="left">@item.FakturisFullname</td>
+                        <td align="center">@item.SPVFakturisNik</td>
+                        <td align="left">@item.SPVFakturisFullname</td>
+                        <td align="left">@item.Remarks</td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div id="modal-confirmation" class="modal fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <form id="form-confirmation" class="modal-dialog modal-sm" method="post" action="@Url.Action("ImportTagih", "HierTagih")">
+        @Html.AntiForgeryToken()
+        @*<input type="hidden" name="Id" value="@Model.Id" />*@
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Apakah yakin upload data ini?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn default">tidak</button>
+                <button type="submit" class="btn blue">ya</button>
+            </div>
+        </div>
+    </form>
+</div>
+
