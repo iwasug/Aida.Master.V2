@@ -472,11 +472,14 @@ namespace AIDA.Master.Service.Businesses
 
                 if (string.IsNullOrEmpty(strListNSM)) return result;
 
-                //listSqlParam.Add(new SqlParameter("@listNIK", strListNSM));
+                if(code == "MDD" || code == "SD1" || code == "SD2")
+                    listSqlParam.Add(new SqlParameter("@nik", strListNSM));
+
             }
             else if (RoleCode.KaCab.Equals(_userAuth.RoleCode))
             {
-                listSqlParam.Add(new SqlParameter("@listNIK", _userAuth.NIK));
+                strListNSM = _userAuth.NIK.ToString();
+                listSqlParam.Add(new SqlParameter("@listNIK", strListNSM));
             }
 
             #region report SLM
@@ -580,10 +583,16 @@ namespace AIDA.Master.Service.Businesses
                     result.IsEnableSummaryASM = SalesGroupRayonCode.DcEnableSummaryASM[code];
                 }
 
-                if (listSqlParam.FirstOrDefault(x=>x.ParameterName.Equals("@listNIK")) == null && !string.IsNullOrEmpty(strListNSM))
+                listSqlParam = new List<SqlParameter>()
                 {
+                    new SqlParameter("@inMonth", result.Month),
+                    new SqlParameter("@inYear", result.Year),
+                };
+
+                if (spASM == "sp_apl_getCollectionASM_All_v2")
                     listSqlParam.Add(new SqlParameter("@listNIK", strListNSM));
-                }
+                else
+                    listSqlParam.Add(new SqlParameter("@nik", _userAuth.NIK));
 
                 DataTableCollection dtCollectionASM = SqlHelper.ExecuteProcedureWithReturnMultipleTable(connString, spASM, listSqlParam);
 

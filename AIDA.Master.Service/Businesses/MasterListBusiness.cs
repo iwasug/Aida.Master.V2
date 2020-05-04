@@ -998,6 +998,11 @@ namespace AIDA.Master.Service.Businesses
                 condition += "	AND rth.FSS = @nik";
                 dcParams["@nik"] = _userAuth.NIK;
             }
+            else if (RoleCode.NSM.Equals(_userAuth.RoleCode))
+            {
+                condition += "	AND rth.NSM = @nik";
+                dcParams["@nik"] = _userAuth.NIK;
+            }
             else
             {
                 return null;
@@ -1555,7 +1560,7 @@ namespace AIDA.Master.Service.Businesses
         {
             bool result = false;
 
-            if ((RoleCode.FSS.Equals(_userAuth.RoleCode) || RoleCode.ASM.Equals(_userAuth.RoleCode)) && _userAuth.IsAbleToWrite)
+            if ((RoleCode.FSS.Equals(_userAuth.RoleCode) || RoleCode.ASM.Equals(_userAuth.RoleCode) || RoleCode.NSM.Equals(_userAuth.RoleCode))  && _userAuth.IsAbleToWrite)
             {
                 result = true;
             } 
@@ -1567,7 +1572,7 @@ namespace AIDA.Master.Service.Businesses
         {
             bool result = false;
 
-            if (RoleCode.KaCab.Equals(_userAuth.RoleCode))
+            if (RoleCode.KaCab.Equals(_userAuth.RoleCode) || RoleCode.NSM.Equals(_userAuth.RoleCode))
             {
                 result = true;
             }

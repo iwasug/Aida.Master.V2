@@ -969,9 +969,11 @@ namespace AIDA.Master.Service.Businesses
         {
             if (_userAuth == null) return false;
 
-            if (!RoleCode.KaCab.Equals(_userAuth.RoleCode)) return false;
+            //if (!RoleCode.KaCab.Equals(_userAuth.RoleCode)) return false;
 
-            return true;
+            if (RoleCode.KaCab.Equals(_userAuth.RoleCode) || RoleCode.NSM.Equals(_userAuth.RoleCode)) return true;
+
+            return false;
         }
 
         public AlertMessage Preview(ImportTagihViewModel model)
